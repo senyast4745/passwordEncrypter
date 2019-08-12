@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id "edu.sc.seis.launch4j" version "2.4.6"
+}
+
+group 'com.siemens.ct.fdo'
+version '1.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '3.1.0.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.siemens.ct.fdo.passwordEncoder.PasswordEncoder'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
